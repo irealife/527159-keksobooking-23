@@ -1,6 +1,6 @@
 function userError (message) {
   this.message = message;
-  this.name = "Исключение ошибки";
+  this.name = 'Исключение ошибки';
 }
 
 function getRandomInt (min, max) {
