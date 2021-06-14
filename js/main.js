@@ -116,4 +116,6 @@ const CREATE_AD = () => {
 
 const SIMILAR_AD_COUNT = 10;
 
-const SIMILAR_AD = new Array(SIMILAR_AD_COUNT).fill(null).map(() => CREATE_AD());
+const GET_SIMILAR_AD = new Array(SIMILAR_AD_COUNT).fill(null).map(() => CREATE_AD());
+
+GET_SIMILAR_AD;
