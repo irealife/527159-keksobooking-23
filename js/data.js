@@ -4,7 +4,7 @@ import {
   getRandomInt,
   getRandomArrayElement,
   getOfferFeatures
-} from './util';
+} from './util.js';
 
 const CHOOSE_OFFER_TYPE = [
   'palace',
