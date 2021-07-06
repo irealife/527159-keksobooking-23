@@ -52,7 +52,7 @@ const MAX_COUNT_QUEST = 10;
 
 const CREATE_AD = () => {
   const AUTHOR = {
-    avatar: `../img/avatars/user${getZeroBeforeInt(MIN_COUNT_AUTHOR, MAX_COUNT_AUTHOR)}.png`,
+    avatar: `img/avatars/user${getZeroBeforeInt(MIN_COUNT_AUTHOR, MAX_COUNT_AUTHOR)}.png`,
   };
   const LOCATION = {
     lat: getRandomIntFloat(35.65000, 35.70000, 5),
