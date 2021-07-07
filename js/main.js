@@ -1,3 +1,3 @@
-import {GET_SIMILAR_AD} from './data.js';
+import {formCard} from './gen_similar.js';
 
-GET_SIMILAR_AD;
+formCard;
