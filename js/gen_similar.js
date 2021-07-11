@@ -90,7 +90,6 @@ for (let arrCounterCard = 0; arrCounterCard <= GET_SIMILAR_AD.length - 1; arrCou
   const popupAvatar = elementCard.querySelector('.popup__avatar');
   popupAvatar.src = GET_SIMILAR_AD[arrCounterCard].author.avatar;
 
-
   cards.push(elementCard);
 }
 
