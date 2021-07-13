@@ -1,4 +1,4 @@
-import {formCard} from './gen_similar.js';
+import {formCard} from './card.js';
 
 formCard;
 
