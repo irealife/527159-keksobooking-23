@@ -62,3 +62,62 @@ const getRoomToCapacity = () => {
 };
 
 roomCount.addEventListener('change', getRoomToCapacity);
+
+//Валидация типа жилья
+
+const typeHousing = form.querySelector('#type');
+const priceHouse = form.querySelector('#price');
+
+typeHousing.addEventListener('change', () => {
+  switch (typeHousing.value) {
+    case 'bungalow':
+      priceHouse.min = 0;
+      priceHouse.placeholder = 0;
+      break;
+    case 'flat':
+      priceHouse.min = 1000;
+      priceHouse.placeholder = 1000;
+      break;
+    case 'hotel':
+      priceHouse.min = 3000;
+      priceHouse.placeholder = 3000;
+      break;
+    case 'house':
+      priceHouse.min = 5000;
+      priceHouse.placeholder = 5000;
+      break;
+    case 'palace':
+      priceHouse.min = 10000;
+      priceHouse.placeholder = 10000;
+      break;
+  }
+});
+
+//Валидация время заезда и время выезда
+
+const timeIn = form.querySelector('#timein');
+const timeOut = form.querySelector('#timeout');
+
+timeIn.addEventListener('change', () => {
+  for (let inElement=0; inElement<timeIn.options.length; inElement++) {
+    if (timeIn.options[inElement].selected) {
+      for (let outElement=0; outElement<timeOut.options.length; outElement++) {
+        if (timeIn.options[inElement].value === timeOut.options[outElement].value) {
+          timeOut.options[outElement].selected = true;
+        }
+      }
+    }
+  }
+});
+
+timeOut.addEventListener('change', () => {
+  for (let inElement=0; inElement<timeOut.options.length; inElement++) {
+    if (timeOut.options[inElement].selected) {
+      for (let outElement=0; outElement<timeIn.options.length; outElement++) {
+        if (timeOut.options[inElement].value === timeIn.options[outElement].value) {
+          timeIn.options[outElement].selected = true;
+        }
+      }
+    }
+  }
+});
