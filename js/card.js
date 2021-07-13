@@ -2,12 +2,9 @@ import {GET_SIMILAR_AD} from './data.js';
 
 GET_SIMILAR_AD;
 
-const formCard = document.querySelector('#map-canvas');
-
 const templateFragmentCard = document.querySelector('#card').content;
 const templateCard = templateFragmentCard.querySelector('article');
 
-const fragment = document.createDocumentFragment();
 const cards = [];
 
 //Вывод типа жилья (квартира, бунгало, дом и т.д.)
@@ -47,55 +44,57 @@ const getObjectValue = (array, keys, values) => {
 
 //Карточка объявления
 
-for (let arrCounterCard = 0; arrCounterCard <= GET_SIMILAR_AD.length - 1; arrCounterCard++) {
-  const elementCard = templateCard.cloneNode(true);
-  const popupTitle = elementCard.querySelector('.popup__title');
-  popupTitle.textContent = GET_SIMILAR_AD[arrCounterCard].offer.title;
-  const popupAddress = elementCard.querySelector('.popup__text--address');
-  popupAddress.textContent = GET_SIMILAR_AD[arrCounterCard].offer.address;
-  const popupPrice = elementCard.querySelector('.popup__text--price');
-  popupPrice.textContent = `${GET_SIMILAR_AD[arrCounterCard].offer.price} ₽/ночь`;
-  const popupType = elementCard.querySelector('.popup__type');
-  popupType.textContent = getObjectValue(CHOOSE_OFFER_TYPE, keysOfferType, valuesOfferType);
+const elementCard = templateCard.cloneNode(true);
 
-  const popupCapacity = elementCard.querySelector('.popup__text--capacity');
-  popupCapacity.textContent = `${GET_SIMILAR_AD[arrCounterCard].offer.rooms} комнаты для ${GET_SIMILAR_AD[arrCounterCard].offer.guests} гостей.`;
-  const popupTime = elementCard.querySelector('.popup__text--time');
-  popupTime.textContent = `Заезд после ${GET_SIMILAR_AD[arrCounterCard].offer.checkin}, выезд до ${GET_SIMILAR_AD[arrCounterCard].offer.checkout}`;
+const createCard = () => {
+  for (let arrCounterCard = 0; arrCounterCard <= GET_SIMILAR_AD.length - 1; arrCounterCard++) {
+    const popupTitle = elementCard.querySelector('.popup__title');
+    popupTitle.textContent = GET_SIMILAR_AD[arrCounterCard].offer.title;
+    const popupAddress = elementCard.querySelector('.popup__text--address');
+    popupAddress.textContent = GET_SIMILAR_AD[arrCounterCard].offer.address;
+    const popupPrice = elementCard.querySelector('.popup__text--price');
+    popupPrice.textContent = `${GET_SIMILAR_AD[arrCounterCard].offer.price} ₽/ночь`;
+    const popupType = elementCard.querySelector('.popup__type');
+    popupType.textContent = getObjectValue(CHOOSE_OFFER_TYPE, keysOfferType, valuesOfferType);
 
-  //Вывод доступных удобств в номере
+    const popupCapacity = elementCard.querySelector('.popup__text--capacity');
+    popupCapacity.textContent = `${GET_SIMILAR_AD[arrCounterCard].offer.rooms} комнаты для ${GET_SIMILAR_AD[arrCounterCard].offer.guests} гостей.`;
+    const popupTime = elementCard.querySelector('.popup__text--time');
+    popupTime.textContent = `Заезд после ${GET_SIMILAR_AD[arrCounterCard].offer.checkin}, выезд до ${GET_SIMILAR_AD[arrCounterCard].offer.checkout}`;
 
-  const popupFeatures = elementCard.querySelector('.popup__features');
+    //Вывод доступных удобств в номере
 
-  const featuresModifiers = GET_SIMILAR_AD[arrCounterCard].offer.features.map((feature) => `popup__feature--${feature}`);
-  popupFeatures.querySelectorAll('.popup__feature').forEach((item) => {
-    const featureModifier = item.classList[1];
-    if (!featuresModifiers.includes(featureModifier)) {
-      item.remove();
-      return featuresModifiers;
-    }
-  });
+    const popupFeatures = elementCard.querySelector('.popup__features');
 
-  const popupDescription = elementCard.querySelector('.popup__description');
-  popupDescription.textContent = GET_SIMILAR_AD[arrCounterCard].offer.description;
+    const featuresModifiers = GET_SIMILAR_AD[arrCounterCard].offer.features.map((feature) => `popup__feature--${feature}`);
+    popupFeatures.querySelectorAll('.popup__feature').forEach((item) => {
+      const featureModifier = item.classList[1];
+      if (!featuresModifiers.includes(featureModifier)) {
+        item.remove();
+        return featuresModifiers;
+      }
+    });
 
-  //Вывод всех фото объявления
+    const popupDescription = elementCard.querySelector('.popup__description');
+    popupDescription.textContent = GET_SIMILAR_AD[arrCounterCard].offer.description;
 
-  const popupPhotos = elementCard.querySelector('.popup__photos');
+    //Вывод всех фото объявления
 
-  popupPhotos.querySelectorAll('.popup__photo').forEach((item) => {
-    item.src = GET_SIMILAR_AD[arrCounterCard].offer.photos;
-  });
+    const popupPhotos = elementCard.querySelector('.popup__photos');
 
-  const popupAvatar = elementCard.querySelector('.popup__avatar');
-  popupAvatar.src = GET_SIMILAR_AD[arrCounterCard].author.avatar;
+    popupPhotos.querySelectorAll('.popup__photo').forEach((item) => {
+      item.src = GET_SIMILAR_AD[arrCounterCard].offer.photos;
+    });
 
-  cards.push(elementCard);
-}
+    const popupAvatar = elementCard.querySelector('.popup__avatar');
+    popupAvatar.src = GET_SIMILAR_AD[arrCounterCard].author.avatar;
 
-fragment.appendChild(cards[0]);
-formCard.appendChild(fragment);
+    cards.push(elementCard);
+    return elementCard;
+  }
+};
 
 export {
-  formCard
+  cards,
+  createCard
 };
