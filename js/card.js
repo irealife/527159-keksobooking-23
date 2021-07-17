@@ -96,8 +96,9 @@ const PHOTO_DESC = {
 const createPhotos = (array) => {
   let fragmentPhoto = document.createDocumentFragment();
   for (let count = 0; count <= array; count++) {
-    let photo = createImg(count, PHOTO_DESC.width, PHOTO_DESC.height, PHOTO_DESC.alt, 'popup__photo');
+    let photo = createImg(array[count], PHOTO_DESC.width, PHOTO_DESC.height, PHOTO_DESC.alt, 'popup__photo');
     fragmentPhoto.appendChild(photo);
+    console.log(fragmentPhoto);
   }
   // array.forEach((item) => {
   //   console.log(item);
@@ -128,17 +129,17 @@ const renderCardList = (cards) => {
 
       //Вывод доступных удобств в номере
 
-      // const popupFeatures = cardElement.querySelector('.popup__features');
-      // const featuresModifiers = cards[arrCounterCard].offer.features.map((feature) => `popup__feature--${feature}`);
-      // popupFeatures.querySelectorAll('.popup__feature').forEach((item) => {
-      //   const featureModifier = item.classList[1];
-      //   if (!featuresModifiers.includes(featureModifier)) {
-      //     item.remove();
-      //     return featuresModifiers;
-      //   }
-      // });
       const popupFeatures = cardElement.querySelector('.popup__features');
-      popupFeatures.textContent = `${cards[arrCounterCard].offer.features}`;
+      const featuresModifiers = cards[arrCounterCard].offer.features;
+      featuresModifiers.map((`${cards[arrCounterCard].offer.features}`) => `popup__feature--${cards[arrCounterCard].offer.features}`);
+      popupFeatures.querySelectorAll('.popup__feature').forEach((item) => {
+        const featureModifier = item.classList[1];
+        if (!featuresModifiers.includes(featureModifier)) {
+          item.remove();
+          console.log(featureModifier);
+          return featuresModifiers;
+        }
+      });
 
       const popupDescription = cardElement.querySelector('.popup__description');
       popupDescription.textContent = cards[arrCounterCard].offer.description;
@@ -148,6 +149,7 @@ const renderCardList = (cards) => {
       const popupPhotos = cardElement.querySelector('.popup__photos');
       popupPhotos.textContent = '';
       popupPhotos.appendChild(createPhotos(cards[arrCounterCard].offer.photos));
+
       // popupPhotos.querySelectorAll('.popup__photo').forEach((item) => {
       //   item.src = cards[arrCounterCard].offer.photos;
       // });
