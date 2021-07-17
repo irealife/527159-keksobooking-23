@@ -24,8 +24,7 @@ const getRandomIntFloat = (min, max, intFloat) => {
 };
 
 const getRandomArrayElement = (elements) => {
-  const element = elements[_.random(0, elements.length - 1)];
-  return element;
+  return elements[_.random(0, elements.length - 1)];
 };
 
 const getZeroBeforeInt = (min, max) => {

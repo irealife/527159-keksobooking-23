@@ -1,8 +1,7 @@
 import {GET_SIMILAR_AD} from './data.js';
-import {cards, createCard} from './card.js';
+import {renderCardList} from './card.js';
 
 GET_SIMILAR_AD;
-cards;
 
 const adForm = document.querySelector('.ad-form');
 const fieldsetAdForm = adForm.querySelectorAll('fieldset');
@@ -125,7 +124,7 @@ const createMarker = () => {
     marker
       .addTo(mapLeaflet)
       .bindPopup(
-        createCard(),
+        renderCardList(),
         {
           keepInView: true,
         },
@@ -133,9 +132,9 @@ const createMarker = () => {
   });
 };
 
-markerLocation.forEach((mark) => {
-  createMarker(mark);
-});
+// markerLocation.forEach((mark) => {
+//   createMarker(mark);
+// });
 
 export {
   mapLeaflet
