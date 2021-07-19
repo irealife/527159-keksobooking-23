@@ -1,7 +1,5 @@
-import {GET_SIMILAR_AD} from './data.js';
-import {renderCardList} from './card.js';
-
-GET_SIMILAR_AD;
+import {createCardList} from './card.js';
+import {getRandomIntFloat} from './util.js';
 
 const adForm = document.querySelector('.ad-form');
 const fieldsetAdForm = adForm.querySelectorAll('fieldset');
@@ -94,6 +92,19 @@ mainPinMarker.on('moveend', () => {
 
 //Обычные метки на карте
 
+const locationMarker = () => {
+  const LOCATION = {
+    lat: getRandomIntFloat(35.65000, 35.70000, 5),
+    lng: getRandomIntFloat(139.70000, 139.80000, 5),
+  };
+  return {
+    location: {...LOCATION},
+  };
+};
+
+const COUNT_LOCATION = 10;
+const getLocation = new Array(COUNT_LOCATION).fill(null).map(() => locationMarker());
+
 const markerLocation = [];
 
 const getLocationMark = (array) => {
@@ -102,7 +113,7 @@ const getLocationMark = (array) => {
   }
 };
 
-getLocationMark(GET_SIMILAR_AD);
+getLocationMark(getLocation);
 
 const createMarker = () => {
   markerLocation.forEach(({lat, lng}) => {
@@ -124,7 +135,7 @@ const createMarker = () => {
     marker
       .addTo(mapLeaflet)
       .bindPopup(
-        renderCardList(),
+        createCardList,
         {
           keepInView: true,
         },
@@ -132,9 +143,9 @@ const createMarker = () => {
   });
 };
 
-// markerLocation.forEach((mark) => {
-//   createMarker(mark);
-// });
+markerLocation.forEach((mark) => {
+  createMarker(mark);
+});
 
 export {
   mapLeaflet

@@ -40,10 +40,20 @@ const getOfferFeatures = (array) => {
   return array.slice(0, index);
 };
 
+//Создает элемент с заданным классом
+const createElement = (name, elementClass) => {
+  let newElement = document.createElement(name);
+  if (elementClass) {
+    newElement.className = elementClass;
+  }
+  return newElement;
+};
+
 export {
   getRandomInt,
   getRandomIntFloat,
   getRandomArrayElement,
   getZeroBeforeInt,
-  getOfferFeatures
+  getOfferFeatures,
+  createElement
 };

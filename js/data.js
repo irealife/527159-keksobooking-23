@@ -79,6 +79,20 @@ const CREATE_AD = () => {
   return objFlat;
 };
 
+const locationMarker = () => {
+  const LOCATION = {
+    lat: getRandomIntFloat(35.65000, 35.70000, 5),
+    lng: getRandomIntFloat(139.70000, 139.80000, 5),
+  };
+  const objLocation = {
+    location: {...LOCATION},
+  };
+  return objLocation;
+};
+
+const COUNT_LOCATION = 10;
+const getLocation = new Array(COUNT_LOCATION).fill(null).map(() => locationMarker());
+
 const SIMILAR_AD_COUNT = 10;
 
 const GET_SIMILAR_AD = new Array(SIMILAR_AD_COUNT).fill(null).map(() => CREATE_AD());
