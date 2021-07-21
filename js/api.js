@@ -1,18 +1,18 @@
 import {showAlert} from './showAlert.js';
 
-const getData = (onSuccess) => {
-  fetch(
+const getData = () => {
+  return fetch(
     'https://23.javascript.pages.academy/keksobooking/data'
   )
     .then((response) => response.json())
-    .then(onSuccess)
+    .then((data) => data)
     .catch(() => {
       showAlert('Не удалось загрузить данные с сервера');
     });
 };
 
 const sendData = (onSuccess, onError, body) => {
-  fetch(
+  return fetch(
     'https://23.javascript.pages.academy/keksobooking',
     {
       'method': 'POST',

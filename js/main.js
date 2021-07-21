@@ -1,6 +1,7 @@
-import {getData} from './api.js';
-import {mapLeaflet} from './map.js';
+import {mapInit} from './map.js';
+import {formValidation} from './formValidation.js';
+import {setButtonSubmit, onSubmit, showErrorMessage} from './form.js';
 
-mapLeaflet;
-
-getData();
+mapInit();
+formValidation();
+setButtonSubmit(onSubmit, showErrorMessage);
