@@ -1,9 +1,10 @@
 import {sendData} from './api.js';
+import {mapInit} from './map.js';
 
 const ESCAPE = 'Escape';
 
-const buttonSubmit = document.querySelector('.ad-form__submit');
 const form = document.querySelector('.ad-form');
+const housingFilter = document.querySelector('#housing-type');
 const successMessage = document.querySelector('#success').content.querySelector('.success').cloneNode(true);
 const errorMessage = document.querySelector('#error').content.querySelector('.error').cloneNode(true);
 const isEscEvent = (evt) => evt.key === ESCAPE;
@@ -62,7 +63,7 @@ const onSubmit = () => {
 };
 
 const setButtonSubmit = (onSuccess, onFail) => {
-  buttonSubmit.addEventListener('submit', (evt) => {
+  form.addEventListener('submit', (evt) => {
     evt.preventDefault();
 
     sendData(
@@ -73,7 +74,14 @@ const setButtonSubmit = (onSuccess, onFail) => {
   });
 };
 
+const setFilter = (onSuccess, onFail) => {
+  housingFilter.addEventListener('change', (evt) => {
+    mapInit();
+  })
+}
+
 export {
+  setFilter,
   onSubmit,
   setButtonSubmit,
   showErrorMessage

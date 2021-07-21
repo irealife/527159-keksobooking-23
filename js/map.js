@@ -1,6 +1,8 @@
 import {createCardList} from './card.js';
 //import {getRandomIntFloat} from './util.js';
 import {getData} from './api.js';
+import {setFeatures, setFilters, matchesFilters, sortOffers} from './filter.js';
+import {debounce} from './utils/debounce.js';
 
 const adForm = document.querySelector('.ad-form');
 const fieldsetAdForm = adForm.querySelectorAll('fieldset');
@@ -47,11 +49,24 @@ const activeForm = () => {
 //Карта leaflet
 
 const mapLeaflet = L.map('map-canvas');
+const markerGroup = L.layerGroup().addTo(mapLeaflet);
+const RERENDER_DELAY = 500;
 
 //Обычные метки на карте
 
 const createMarkers = () => {
+
   getData().then((data) => {
+    renderMap(data);
+    setFeatures(debounce(
+      () => renderMap(data),
+      RERENDER_DELAY,
+    ));
+    setFilters(debounce(
+      () => renderMap(data),
+      RERENDER_DELAY,
+    ));
+
     data.forEach((card) => {
       const pinIcon = L.icon({
         iconUrl: 'img/pin.svg',
@@ -69,7 +84,7 @@ const createMarkers = () => {
       );
 
       marker
-        .addTo(mapLeaflet)
+        .addTo(markerGroup)
         .bindPopup(() => {
             return createCardList(card);
           },
@@ -82,6 +97,7 @@ const createMarkers = () => {
 };
 
 const mapInit = () => {
+  // mapLeaflet.eachLayer((layer) => layer.remove());
   mapLeaflet
     .on('load', () => {
       activeForm();
@@ -128,8 +144,29 @@ const mapInit = () => {
   createMarkers();
 };
 
+const COUNT_CARD = 10;
+const renderMap = (data) => {
+  markerGroup.clearLayers();
 
+  const sortedCards = data
+    .slice()
+    .sort(sortOffers);
+
+  let matchedCards = 0;
+
+  for ( let i = 0; i < sortedCards.length; i++) {
+    if (matchedCards >= COUNT_CARD) {
+      break;
+    }
+
+    if (matchesFilters(sortedCards[i])){
+      mapInit(sortedCards[i]);
+      matchedCards++;
+    }
+  }
+};
 
 export {
-  mapInit
+  mapInit,
+  renderMap
 };

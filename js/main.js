@@ -1,7 +1,9 @@
-import {mapInit} from './map.js';
+import {mapInit, renderMap} from './map.js';
 import {formValidation} from './formValidation.js';
-import {setButtonSubmit, onSubmit, showErrorMessage} from './form.js';
+import {setButtonSubmit, onSubmit, showErrorMessage, setFilter} from './form.js';
 
 mapInit();
 formValidation();
+setFilter();
 setButtonSubmit(onSubmit, showErrorMessage);
+
