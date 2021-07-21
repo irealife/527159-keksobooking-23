@@ -24,8 +24,7 @@ const getRandomIntFloat = (min, max, intFloat) => {
 };
 
 const getRandomArrayElement = (elements) => {
-  const element = elements[_.random(0, elements.length - 1)];
-  return element;
+  return elements[_.random(0, elements.length - 1)];
 };
 
 const getZeroBeforeInt = (min, max) => {
@@ -41,10 +40,20 @@ const getOfferFeatures = (array) => {
   return array.slice(0, index);
 };
 
+//Создает элемент с заданным классом
+const createElement = (name, elementClass) => {
+  let newElement = document.createElement(name);
+  if (elementClass) {
+    newElement.className = elementClass;
+  }
+  return newElement;
+};
+
 export {
   getRandomInt,
   getRandomIntFloat,
   getRandomArrayElement,
   getZeroBeforeInt,
-  getOfferFeatures
+  getOfferFeatures,
+  createElement
 };

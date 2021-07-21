@@ -1,5 +1,7 @@
-import {cards} from './card.js';
-import {mapLeaflet} from './map.js';
+import {mapInit} from './map.js';
+import {formValidation} from './formValidation.js';
+import {setButtonSubmit, onSubmit, showErrorMessage} from './form.js';
 
-cards;
-mapLeaflet;
+mapInit();
+formValidation();
+setButtonSubmit(onSubmit, showErrorMessage);
